@@ -289,7 +289,7 @@ export const resolvers = {
       for await (const order of orders) {
         const product = await ctx.prisma.product.findUnique({ where: { id: order.productId } })
         if (!product /* || order.amount > product?.stock */) {
-          throw new Error(`product ${product?.name} not exists`)
+          throw new Error(`product not exists`)
         }
       }
 
