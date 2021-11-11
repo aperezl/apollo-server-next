@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb", "fullTextSearch"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String     @id @default(uuid()) @map("_id")
+  email    String     @unique
+  name     String?
+  password String
+  created  DateTime   @default(now())
+  Customer Customer[]
+  Orders   Order[]
+}
+
+model Product {
+  id      String   @id @default(uuid()) @map("_id")
+  name    String
+  stock   Int
+  price   Float
+  created DateTime @default(now())
+}
+
+model Customer {
+  id        String   @id @default(uuid()) @map("_id")
+  firstName String
+  lastName  String
+  company   String
+  email     String   @unique
+  phone     String?
+  created   DateTime @default(now())
+  seller    User     @relation(fields: [userId], references: [id])
+  userId    String
+  Orders    Order[]
+}
+
+model Order {
+  id         String        @id @default(uuid()) @map("_id")
+  Order      OrderDetail[]
+  total      Float
+  customer   Customer      @relation(fields: [customerId], references: [id])
+  customerId String
+  seller     User          @relation(fields: [userId], references: [id])
+  userId     String
+  status     Status        @default(PENDING)
+  created    DateTime      @default(now())
+}
+
+model OrderDetail {
+  id        String  @id @default(uuid()) @map("_id")
+  amount    Int
+  productId String
+  Order     Order?  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String?
+}
+
+enum Status {
+  PENDING
+  COMPLETED
+  CANCELED
+}

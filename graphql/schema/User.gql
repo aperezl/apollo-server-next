@@ -1,0 +1,25 @@
+type User {
+  id: ID!
+  email: String!
+  name: String
+  created: String
+}
+
+type TopUser {
+  total: Float
+  user: User
+}
+
+input UserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+type Query {
+  getUser(token: String!): User
+  getBestUsers: [TopUser]
+}
+
+type Mutation {
+  createUser(input: UserInput): User
+}

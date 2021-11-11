@@ -1,0 +1,52 @@
+enum StatusOrder {
+  PENDING
+  COMPLETED
+  CANCELED
+}
+
+type Order {
+  id: ID
+  orders: [OrderGroup]
+  total: Float
+  customerId: ID
+  userId: ID
+  created: String
+  status: StatusOrder
+}
+
+type OrderGroup {
+  id: ID
+  productId: String
+  amount: Float
+}
+
+input OrderProductInput {
+  productId: ID!
+  amount: Int
+}
+
+input createOrderInput {
+  orders: [OrderProductInput]
+  total: Float!
+  customerId: ID!
+  status: StatusOrder
+}
+
+input updateOrderInput {
+  orders: [OrderProductInput]
+  status: StatusOrder
+}
+
+type Mutation {
+  createOrder(input: createOrderInput): Order
+  updateOrder(id: ID!, input: updateOrderInput): Order
+  deleteOrder(id: ID!): Order
+}
+
+type Query {
+  getOrders: [Order]
+  getOrdersByUser: [Order]
+  getOrder(id: ID!): Order
+  getOrderByStatus(status: StatusOrder): [Order]
+}
+
