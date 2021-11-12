@@ -68,10 +68,11 @@ const Register = () => {
 
   return (
     <Layout>
-      { message && showMessage() }
       <h1 className="text-center text-2xl text-white font-light">
         Register
       </h1>
+
+      { message && showMessage() }
 
       <div className="flex justify-center mt-5">
         <div className="w-full max-w-sm">
