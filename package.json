@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.17",
     "@prisma/client": "^3.4.2",
     "apollo-server-micro": "^3.5.0",
     "bcryptjs": "^2.4.3",
