@@ -12,7 +12,8 @@ const createToken = (user: User, secret: string, expiresIn: any) => {
 export const resolvers = {
   Query: {
     getUser: async (_: unknown, { token }: any, ctx: Context) => {
-      return await jwt.verify(token, process.env.SECRET ?? '')
+      console.log('token2', token)
+      return await jwt.verify(token, process.env.SECRET || '')
     },
     getProducts: async (_: unknown, __: unknown, ctx: Context) => {
       return await ctx.prisma.product.findMany({})
@@ -171,7 +172,7 @@ export const resolvers = {
         throw new Error('Incorrect password')
       }
       return {
-        token: createToken(existsUser, process.env.SECRET ?? '', '24h')
+        token: createToken(existsUser, process.env.SECRET || '', '24h')
       }
     },
     createProduct: async (_: unknown, { input }: any, ctx: Context) => {

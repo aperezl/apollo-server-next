@@ -10,10 +10,11 @@ export type Context = {
 export async function createContext({ req }: any): Promise<Context> {
   let user
   const token = req.headers['authorization']
-  console.log('token', token)
+  console.log('token', token, process.env.SECRET)
   if (token) {
     try {
-      user = jwt.verify(token, process.env.SECRET || '')
+      user = jwt.verify(token, process.env.SECRET ?? '')
+    console.log('user', user)
     } catch(e) {
       console.log('error', e)
     }
