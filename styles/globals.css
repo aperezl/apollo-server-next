@@ -1,3 +1,26 @@
 @tailwind base;
+
 @tailwind components;
+.panel {
+  @apply w-80 bg-white rounded-xl shadow-md m-3;
+}
+
+.debug {
+  @apply bg-gray-100 sm:bg-yellow-300 md:bg-green-300 lg:bg-pink-300 xl:bg-blue-300 2xl:bg-red-300
+}
+
+.btn {
+  @apply inline-block px-5 py-3 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-opacity-50 rounded-lg uppercase tracking-wider font-semibold text-sm sm:text-base
+}
+
+.btn-primary {
+  @apply btn bg-brand hover:bg-brand-light focus:ring-brand active:bg-brand-dark text-white 
+}
+
+.btn-secondary {
+  @apply btn bg-gray-300 hover:bg-gray-200 focus:ring-gray-300  active:bg-gray-400  text-gray-800
+}
+
+
 @tailwind utilities;
+
